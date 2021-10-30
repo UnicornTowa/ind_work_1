@@ -82,16 +82,8 @@ public:
     }
 };
 
-/*void Count(vector<Animals*>& collection, string what) {
+void Count(vector<Animals*>& collection, string what) {
     int q = 0;
-    static bool ch, cd;
-    if (what == "Human")
-        ch = true;
-    else if (what == "Dolphin")
-        cd = true;
-    else {
-        cout << "what are u doing m8?" << endl;
-        return;}
     for (Animals* i : collection) {
         auto temp = *i;
         if (i->what == what) {
@@ -99,17 +91,17 @@ public:
         }
     }
     if (q > 10) {
-        if (what == "Human" && ch){
+        if (what == "Human"){
             cout << "OMG!! Congratulations! There is more than 10 " << what << "s!" << endl;
-            ch = false;}
-        else if (what == "Dolphin" && cd) {
+            }
+        else if (what == "Dolphin") {
             cout << "OMG!! Congratulations! There is more than 10 " << what << "s!" << endl;
-            cd = false;}
+            }
         }
     cout << "There are exactly " << q << " "<< what << "s!!" << endl;
-}*/
+}
 
-bool STOP = false;
+/*bool STOP = false;
 
 void Count_D (vector<Animals*>& collection, int &number) {
     while (!STOP) {
@@ -147,7 +139,7 @@ void Count_H (vector<Animals*>& collection, int &number) {
         }
         std::this_thread::sleep_for(250ms);
     }
-}
+}*/
 
 int id_gen() {
     static int i = 0;
@@ -231,13 +223,13 @@ int main() {
         }
         quantity -= 1;
     }
-    //thread count_humans(Count, ref(collection), "Human");
-    //thread count_dolphins(Count, ref(collection), "Dolphin");
-    //count_humans.join();
-    //count_dolphins.join();
+    thread count_humans(Count, ref(collection), "Human");
+    thread count_dolphins(Count, ref(collection), "Dolphin");
+    count_humans.join();
+    count_dolphins.join();
 
-    count_dolphins_parallel.join();
-    count_humans_parallel.join();
-    STOP = true;
-    cout << STOP << endl;
-    cout << "There are exactly " << n_of_dolphins << " dolphins and " << n_of_humans << " humans" << endl;
+    //count_dolphins_parallel.join();
+    //count_humans_parallel.join();
+    //STOP = true;
+    //cout << STOP << endl;
+    //cout << "There are exactly " << n_of_dolphins << " dolphins and " << n_of_humans << " humans" << endl;
